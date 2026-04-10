@@ -39,3 +39,5 @@ env/
 # Thadata specific
 backend/uploads/
 backend/data/
+frontend/.vercel/
+*.env.production
