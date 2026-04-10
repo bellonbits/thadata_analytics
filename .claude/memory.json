@@ -1,0 +1,20 @@
+{
+  "datasets": [],
+  "previous_insights": [],
+  "business_context": {
+    "industry": null,
+    "company": null,
+    "key_metrics": [],
+    "time_zone": null,
+    "fiscal_year_start": null
+  },
+  "user_preferences": {
+    "output_mode": null,
+    "confidence_threshold": 0.70,
+    "currency": "USD",
+    "date_format": "YYYY-MM-DD",
+    "preferred_chart_types": []
+  },
+  "active_constraints": [],
+  "session_history": []
+}
