@@ -4,32 +4,20 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 
-let globalUserPromise: Promise<{ data: { user: User | null } }> | null = null;
-let globalSupabase: any = null;
-
 export function useUser() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!globalSupabase) {
-      globalSupabase = createClient();
-    }
-    const supabase = globalSupabase;
+    const supabase = createClient();
 
-    if (!globalUserPromise) {
-      globalUserPromise = supabase.auth.getUser();
-    }
-
-    globalUserPromise.then(({ data }) => {
+    supabase.auth.getUser().then(({ data }) => {
       setUser(data.user);
       setLoading(false);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      const sessionUser = session?.user ?? null;
-      setUser(sessionUser);
-      globalUserPromise = Promise.resolve({ data: { user: sessionUser } });
+      setUser(session?.user ?? null);
     });
 
     return () => subscription.unsubscribe();
